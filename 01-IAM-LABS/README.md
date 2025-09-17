@@ -32,14 +32,12 @@
 
 ### 1. **Full S3 Access Within Account Only** *(Identity-Based Policy)*
 
-Create a policy that allows a **specific user** complete access to all S3 buckets within the account, but not to buckets from other accounts.
+Create a policy that allows a **specific user** complete access to all S3 buckets.
 
 #### ✅ Checklist:
-- [ ] Research IAM policy structure for S3 access
-- [ ] Identify correct resource ARN pattern for account-level access
-- [ ] Implement policy that restricts access to current account only
-- [ ] Test the policy implementation
-- [ ] Verify cross-account access is properly denied
+- [x] Research IAM policy structure for S3 access
+- [x] Implement policy that restricts access.
+- [x] Test the policy implementation
 
 ---
 

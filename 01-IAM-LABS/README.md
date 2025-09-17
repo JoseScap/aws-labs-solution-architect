@@ -30,7 +30,7 @@
 **Estimated time:** 2-3 hours per exercise
 **Key skills developed:** Policy writing, resource ARN construction, basic security principles
 
-### 1. **Full S3 Access Within Account Only**
+### 1. **Full S3 Access Within Account Only** *(Identity-Based Policy)*
 
 Create a policy that allows a **specific user** complete access to all S3 buckets within the account, but not to buckets from other accounts.
 
@@ -43,7 +43,7 @@ Create a policy that allows a **specific user** complete access to all S3 bucket
 
 ---
 
-### 2. **S3 Read-Only Access Restricted by Prefix**
+### 2. **S3 Read-Only Access Restricted by Prefix** *(Identity-Based Policy)*
 
 Grant a **group** read-only access to objects within a bucket, but only if they start with `reports/2025/`.
 
@@ -56,7 +56,7 @@ Grant a **group** read-only access to objects within a bucket, but only if they 
 
 ---
 
-### 3. **VPC Creation Access but No Deletion**
+### 3. **VPC Creation Access but No Deletion** *(Identity-Based Policy)*
 
 Allow a **user** to create new VPCs and subnets, but explicitly deny the action to delete them.
 
@@ -69,7 +69,7 @@ Allow a **user** to create new VPCs and subnets, but explicitly deny the action 
 
 ---
 
-### 4. **NACLs Read-Only Control**
+### 4. **NACLs Read-Only Control** *(Identity-Based Policy)*
 
 Grant a **security group** read-only access to Network Access Control Lists (NACLs) across all VPCs.
 
@@ -82,7 +82,7 @@ Grant a **security group** read-only access to Network Access Control Lists (NAC
 
 ---
 
-### 5. **Restricted Security Groups Access**
+### 5. **Restricted Security Groups Access** *(Identity-Based Policy)*
 
 A **junior user** can modify rules in security groups, but cannot delete them or create new ones.
 
@@ -95,7 +95,7 @@ A **junior user** can modify rules in security groups, but cannot delete them or
 
 ---
 
-### 6. **S3 Bucket Accessible Only via Role**
+### 6. **S3 Bucket Accessible Only via Role** *(Resource-Based Policy)*
 
 Create a policy so that **only a specific role** (e.g., `FinanceRole`) can upload files to the `finance-reports` bucket.
 
@@ -108,7 +108,7 @@ Create a policy so that **only a specific role** (e.g., `FinanceRole`) can uploa
 
 ---
 
-### 7. **Internet Gateways Management**
+### 7. **Internet Gateways Management** *(Identity-Based Policy)*
 
 A **network role** should be able to attach and detach internet gateways to a VPC, but not create or delete them.
 
@@ -121,7 +121,7 @@ A **network role** should be able to attach and detach internet gateways to a VP
 
 ---
 
-### 8. **Multiple Access Combination**
+### 8. **Multiple Access Combination** *(Identity-Based Policy)*
 
 An **auditor role** can:
 
@@ -138,7 +138,7 @@ An **auditor role** can:
 
 ---
 
-### 9. **S3 Bucket Policy for Cross-Account Access**
+### 9. **S3 Bucket Policy for Cross-Account Access** *(Resource-Based Policy)*
 
 Create a **resource-based policy** (bucket policy) that allows a specific external account (`123456789012`) to read objects from your bucket, but only from objects with the prefix `shared/`.
 
@@ -151,7 +151,7 @@ Create a **resource-based policy** (bucket policy) that allows a specific extern
 
 ---
 
-### 10. **IAM Permissions Boundary for Delegated Access**
+### 10. **IAM Permissions Boundary for Delegated Access** *(Permissions Boundary)*
 
 Create a **permissions boundary** that limits a delegated administrator to only manage IAM users and groups, but cannot create or delete roles or policies.
 
@@ -182,7 +182,7 @@ Create a **permissions boundary** that limits a delegated administrator to only 
 **Estimated time:** 3-4 hours per exercise
 **Key skills developed:** Conditional logic, policy optimization, service integration, security best practices
 
-### 11. **Conditional S3 Access by IP**
+### 11. **Conditional S3 Access by IP** *(Identity-Based Policy)*
 
 A **role** should be able to list and read objects from a bucket, but only if the connection comes from your office IP (e.g., `203.0.113.0/24`).
 
@@ -195,7 +195,7 @@ A **role** should be able to list and read objects from a bucket, but only if th
 
 ---
 
-### 12. **Route Tables Access Within Specific VPC**
+### 12. **Route Tables Access Within Specific VPC** *(Identity-Based Policy)*
 
 Give a **role** permissions to manage route tables, but only within VPC `vpc-123456`.
 
@@ -208,7 +208,7 @@ Give a **role** permissions to manage route tables, but only within VPC `vpc-123
 
 ---
 
-### 13. **Tag-Based Access in VPC**
+### 13. **Tag-Based Access in VPC** *(Identity-Based Policy)*
 
 Allow a **group** to manage subnets, but only if they have the tag `"Environment": "Dev"`.
 
@@ -221,7 +221,7 @@ Allow a **group** to manage subnets, but only if they have the tag `"Environment
 
 ---
 
-### 14. **Deny Bucket Access Except for One User**
+### 14. **Deny Bucket Access Except for One User** *(Identity-Based Policy)*
 
 Create an **explicit denial policy** for all users in a group, except one (`JuanDev`), who should be able to access the bucket.
 
@@ -234,7 +234,7 @@ Create an **explicit denial policy** for all users in a group, except one (`Juan
 
 ---
 
-### 15. **S3 Access Only with MFA Enabled**
+### 15. **S3 Access Only with MFA Enabled** *(Identity-Based Policy)*
 
 Allow a **user** to access S3 objects only if they logged in with MFA.
 
@@ -247,7 +247,7 @@ Allow a **user** to access S3 objects only if they logged in with MFA.
 
 ---
 
-### 16. **S3 Access with Time Condition**
+### 16. **S3 Access with Time Condition** *(Identity-Based Policy)*
 
 A **temporary user** can access an S3 bucket only during business hours (e.g., 9 AM to 6 PM UTC).
 
@@ -260,7 +260,7 @@ A **temporary user** can access an S3 bucket only during business hours (e.g., 9
 
 ---
 
-### 17. **S3 Bucket Versioning and Lifecycle Management**
+### 17. **S3 Bucket Versioning and Lifecycle Management** *(Identity-Based Policy)*
 
 A **data management role** can manage S3 bucket versioning and lifecycle policies, but cannot delete objects or modify bucket settings.
 
@@ -273,7 +273,7 @@ A **data management role** can manage S3 bucket versioning and lifecycle policie
 
 ---
 
-### 18. **VPC Flow Logs Management**
+### 18. **VPC Flow Logs Management** *(Identity-Based Policy)*
 
 A **network monitoring group** can create, modify, and delete VPC Flow Logs, but cannot access the actual log data stored in S3.
 
@@ -286,7 +286,7 @@ A **network monitoring group** can create, modify, and delete VPC Flow Logs, but
 
 ---
 
-### 19. **VPC Endpoints for S3 Access**
+### 19. **VPC Endpoints for S3 Access** *(Identity-Based Policy)*
 
 A **network architect** can create and manage VPC endpoints for S3, but cannot modify the VPC's route tables or security groups.
 
@@ -299,7 +299,7 @@ A **network architect** can create and manage VPC endpoints for S3, but cannot m
 
 ---
 
-### 20. **VPC Peering Route Management**
+### 20. **VPC Peering Route Management** *(Identity-Based Policy)*
 
 A **network engineer** can manage routes in VPC peering connections, but cannot create or delete the peering connections themselves.
 
@@ -312,7 +312,7 @@ A **network engineer** can manage routes in VPC peering connections, but cannot 
 
 ---
 
-### 21. **Session Policy for Temporary S3 Access**
+### 21. **Session Policy for Temporary S3 Access** *(Session Policy)*
 
 Create a **session policy** that allows temporary access to S3 objects for a specific duration (e.g., 2 hours), with read-only permissions and IP restrictions.
 
@@ -325,7 +325,7 @@ Create a **session policy** that allows temporary access to S3 objects for a spe
 
 ---
 
-### 22. **Organization SCP for Service Restrictions**
+### 22. **Organization SCP for Service Restrictions** *(Organization SCP)*
 
 Create an **Organization Service Control Policy (SCP)** that prevents member accounts from creating or deleting IAM roles, while allowing them to manage users and groups.
 
@@ -338,7 +338,7 @@ Create an **Organization Service Control Policy (SCP)** that prevents member acc
 
 ---
 
-### 23. **Cross-Account Resource-Based Policy**
+### 23. **Cross-Account Resource-Based Policy** *(Resource-Based Policy)*
 
 Create a **resource-based policy** for an S3 bucket that allows multiple external accounts to assume a specific role and access objects, but only during business hours.
 
@@ -351,7 +351,7 @@ Create a **resource-based policy** for an S3 bucket that allows multiple externa
 
 ---
 
-### 24. **Permissions Boundary for Cross-Service Access**
+### 24. **Permissions Boundary for Cross-Service Access** *(Permissions Boundary)*
 
 Create a **permissions boundary** that allows a role to access both S3 and DynamoDB, but prevents access to any other AWS services.
 
@@ -383,7 +383,7 @@ Create a **permissions boundary** that allows a role to access both S3 and Dynam
 **Estimated time:** 4-6 hours per exercise
 **Key skills developed:** Enterprise architecture, compliance design, advanced troubleshooting, security governance
 
-### 25. **Peering Connections Management**
+### 25. **Peering Connections Management** *(Identity-Based Policy)*
 
 Grant permissions to an **architects group** to create and accept peering connections between VPCs.
 
@@ -396,7 +396,7 @@ Grant permissions to an **architects group** to create and accept peering connec
 
 ---
 
-### 26. **S3 Cross-Region Replication Control**
+### 26. **S3 Cross-Region Replication Control** *(Identity-Based Policy)*
 
 A **backup administrator** can configure S3 cross-region replication between specific buckets, but cannot modify the source bucket's replication settings.
 
@@ -409,7 +409,7 @@ A **backup administrator** can configure S3 cross-region replication between spe
 
 ---
 
-### 27. **S3 Bucket Encryption Management**
+### 27. **S3 Bucket Encryption Management** *(Identity-Based Policy)*
 
 A **security officer** can manage S3 bucket encryption settings and KMS keys, but cannot access the encrypted objects or modify bucket policies.
 
@@ -422,7 +422,7 @@ A **security officer** can manage S3 bucket encryption settings and KMS keys, bu
 
 ---
 
-### 28. **S3 Transfer Acceleration Control**
+### 28. **S3 Transfer Acceleration Control** *(Identity-Based Policy)*
 
 A **performance engineer** can enable and configure S3 Transfer Acceleration, but cannot modify bucket policies or access the accelerated endpoints.
 
@@ -435,7 +435,7 @@ A **performance engineer** can enable and configure S3 Transfer Acceleration, bu
 
 ---
 
-### 29. **VPC DNS Resolution Management**
+### 29. **VPC DNS Resolution Management** *(Identity-Based Policy)*
 
 A **DNS administrator** can manage VPC DNS resolution settings and Route 53 private hosted zones, but cannot modify VPC peering or transit gateway configurations.
 
@@ -448,7 +448,7 @@ A **DNS administrator** can manage VPC DNS resolution settings and Route 53 priv
 
 ---
 
-### 30. **S3 Object Lock and Retention**
+### 30. **S3 Object Lock and Retention** *(Identity-Based Policy)*
 
 A **compliance officer** can configure S3 Object Lock and retention policies, but cannot modify existing locked objects or change bucket versioning settings.
 
@@ -461,7 +461,7 @@ A **compliance officer** can configure S3 Object Lock and retention policies, bu
 
 ---
 
-### 31. **VPC Transit Gateway Management**
+### 31. **VPC Transit Gateway Management** *(Identity-Based Policy)*
 
 A **network architect** can create and manage VPC Transit Gateway attachments, but cannot modify the attached VPCs or their route tables.
 
@@ -474,7 +474,7 @@ A **network architect** can create and manage VPC Transit Gateway attachments, b
 
 ---
 
-### 32. **Advanced Organization SCP with Conditions**
+### 32. **Advanced Organization SCP with Conditions** *(Organization SCP)*
 
 Create an **Organization SCP** that allows member accounts to create S3 buckets only if they have specific tags (`Environment: Production` or `Environment: Development`), and prevents creation of buckets without these tags.
 
@@ -487,7 +487,7 @@ Create an **Organization SCP** that allows member accounts to create S3 buckets 
 
 ---
 
-### 33. **Complex Session Policy with MFA and Time**
+### 33. **Complex Session Policy with MFA and Time** *(Session Policy)*
 
 Create a **session policy** that requires MFA authentication and allows access to sensitive S3 objects only during business hours (9 AM - 5 PM UTC) and from specific IP ranges.
 
@@ -500,7 +500,7 @@ Create a **session policy** that requires MFA authentication and allows access t
 
 ---
 
-### 34. **Cross-Account Permissions Boundary**
+### 34. **Cross-Account Permissions Boundary** *(Permissions Boundary)*
 
 Create a **permissions boundary** that allows a cross-account role to access resources in multiple accounts, but restricts the actions to read-only operations and limits access to specific resource types.
 
@@ -513,7 +513,7 @@ Create a **permissions boundary** that allows a cross-account role to access res
 
 ---
 
-### 35. **Enterprise Resource-Based Policy with Encryption**
+### 35. **Enterprise Resource-Based Policy with Encryption** *(Resource-Based Policy)*
 
 Create a **resource-based policy** for an S3 bucket that allows external accounts to access objects only if they are encrypted with a specific KMS key, and includes audit logging requirements.
 

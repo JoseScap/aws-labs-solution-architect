@@ -45,14 +45,14 @@ Create a policy that allows a **specific user** complete access to all S3 bucket
 
 ### 2. **S3 Read-Only Access Restricted by Prefix** *(Identity-Based Policy)*
 
-Grant a **group** read-only access to objects within a bucket, but only if they start with `reports/2025/`.
+Grant a **group** read-only access to objects within a bucket, but only if they start with `2025/`.
 
 #### ✅ Checklist:
-- [ ] Research IAM groups and their use cases
-- [ ] Identify required S3 permissions for read-only access
-- [ ] Research S3 prefix-based access control conditions
-- [ ] Implement the policy with proper conditions
-- [ ] Test both allowed and denied access scenarios
+- [x] Research IAM groups and their use cases
+- [x] Identify required S3 permissions for read-only access
+- [x] Research S3 prefix-based access control conditions
+- [x] Implement the policy with proper conditions
+- [x] Test both allowed and denied access scenarios
 
 ---
 

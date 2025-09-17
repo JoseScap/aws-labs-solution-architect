@@ -5,12 +5,11 @@
 Create a policy that allows a **specific user** complete access to all S3 buckets within the account, but not to buckets from other accounts.
 
 #### ✅ Checklist:
-- [ ] Create IAM policy with S3 permissions
-- [ ] Use `"Resource": "arn:aws:s3:::*"` for account-level access
-- [ ] Ensure policy doesn't grant cross-account access
-- [ ] Test policy by creating/attaching to user
-- [ ] Verify user can access S3 buckets in current account
-- [ ] Verify user cannot access buckets from other accounts
+- [ ] Research IAM policy structure for S3 access
+- [ ] Identify correct resource ARN pattern for account-level access
+- [ ] Implement policy that restricts access to current account only
+- [ ] Test the policy implementation
+- [ ] Verify cross-account access is properly denied
 
 ---
 
@@ -19,13 +18,11 @@ Create a policy that allows a **specific user** complete access to all S3 bucket
 Grant a **group** read-only access to objects within a bucket, but only if they start with `reports/2025/`.
 
 #### ✅ Checklist:
-- [ ] Create IAM group
-- [ ] Create policy with `s3:GetObject` permission
-- [ ] Use condition `"StringLike": {"s3:prefix": "reports/2025/*"}`
-- [ ] Attach policy to group
-- [ ] Add users to the group
-- [ ] Test access to objects with correct prefix
-- [ ] Test that access is denied for other prefixes
+- [ ] Research IAM groups and their use cases
+- [ ] Identify required S3 permissions for read-only access
+- [ ] Research S3 prefix-based access control conditions
+- [ ] Implement the policy with proper conditions
+- [ ] Test both allowed and denied access scenarios
 
 ---
 
@@ -34,13 +31,11 @@ Grant a **group** read-only access to objects within a bucket, but only if they 
 A **role** should be able to list and read objects from a bucket, but only if the connection comes from your office IP (e.g., `203.0.113.0/24`).
 
 #### ✅ Checklist:
-- [ ] Create IAM role
-- [ ] Create policy with S3 list and read permissions
-- [ ] Add IP condition: `"IpAddress": {"aws:SourceIp": "203.0.113.0/24"}`
-- [ ] Attach policy to role
-- [ ] Test access from allowed IP range
-- [ ] Test that access is denied from other IPs
-- [ ] Document the office IP range
+- [ ] Research IAM roles and their characteristics
+- [ ] Identify required S3 permissions for listing and reading
+- [ ] Research IP-based access control conditions in IAM
+- [ ] Implement the policy with IP restrictions
+- [ ] Test access from different IP ranges
 
 ---
 
@@ -49,13 +44,11 @@ A **role** should be able to list and read objects from a bucket, but only if th
 Allow a **user** to create new VPCs and subnets, but explicitly deny the action to delete them.
 
 #### ✅ Checklist:
-- [ ] Create IAM policy with `ec2:CreateVpc` and `ec2:CreateSubnet` permissions
-- [ ] Add explicit deny for `ec2:DeleteVpc` and `ec2:DeleteSubnet`
-- [ ] Use `"Effect": "Deny"` for deletion actions
-- [ ] Attach policy to user
-- [ ] Test VPC and subnet creation
-- [ ] Verify deletion attempts are denied
-- [ ] Document the policy behavior
+- [ ] Research EC2 VPC and subnet permissions
+- [ ] Understand the difference between allow and deny effects
+- [ ] Research how to implement explicit deny statements
+- [ ] Implement policy with creation permissions and deletion denials
+- [ ] Test both creation and deletion scenarios
 
 ---
 
@@ -64,14 +57,11 @@ Allow a **user** to create new VPCs and subnets, but explicitly deny the action 
 Give a **role** permissions to manage route tables, but only within VPC `vpc-123456`.
 
 #### ✅ Checklist:
-- [ ] Create IAM role
-- [ ] Create policy with EC2 route table permissions
-- [ ] Add condition: `"StringEquals": {"ec2:vpc": "arn:aws:ec2:region:account:vpc/vpc-123456"}`
-- [ ] Include permissions: `ec2:CreateRoute`, `ec2:DeleteRoute`, `ec2:ModifyRouteTable`
-- [ ] Attach policy to role
-- [ ] Test route table operations in specified VPC
-- [ ] Verify access is denied for other VPCs
-- [ ] Update VPC ID to match your environment
+- [ ] Research EC2 route table management permissions
+- [ ] Understand VPC-specific access control conditions
+- [ ] Research how to construct VPC ARNs for conditions
+- [ ] Implement policy with VPC-specific restrictions
+- [ ] Test operations in both allowed and denied VPCs
 
 ---
 
@@ -80,14 +70,11 @@ Give a **role** permissions to manage route tables, but only within VPC `vpc-123
 Grant a **security group** read-only access to Network Access Control Lists (NACLs) across all VPCs.
 
 #### ✅ Checklist:
-- [ ] Create IAM group
-- [ ] Create policy with `ec2:DescribeNetworkAcls` permission
-- [ ] Use `"Resource": "*"` for all VPCs
-- [ ] Attach policy to group
-- [ ] Add users to the group
-- [ ] Test NACL listing and description
-- [ ] Verify users cannot modify NACLs
-- [ ] Test across multiple VPCs
+- [ ] Research NACL permissions and read-only access patterns
+- [ ] Understand the difference between describe and modify permissions
+- [ ] Research resource patterns for cross-VPC access
+- [ ] Implement read-only policy for NACLs
+- [ ] Test access across multiple VPCs
 
 ---
 
@@ -96,13 +83,11 @@ Grant a **security group** read-only access to Network Access Control Lists (NAC
 A **junior user** can modify rules in security groups, but cannot delete them or create new ones.
 
 #### ✅ Checklist:
-- [ ] Create IAM policy with `ec2:AuthorizeSecurityGroupIngress` and `ec2:AuthorizeSecurityGroupEgress`
-- [ ] Add `ec2:RevokeSecurityGroupIngress` and `ec2:RevokeSecurityGroupEgress`
-- [ ] Explicitly deny `ec2:CreateSecurityGroup` and `ec2:DeleteSecurityGroup`
-- [ ] Attach policy to user
-- [ ] Test security group rule modifications
-- [ ] Verify creation and deletion are denied
-- [ ] Document the restricted permissions
+- [ ] Research security group management permissions
+- [ ] Understand the difference between rule modification and group management
+- [ ] Research how to implement granular permission restrictions
+- [ ] Implement policy allowing rule changes but preventing group management
+- [ ] Test both allowed and denied operations
 
 ---
 
@@ -111,14 +96,11 @@ A **junior user** can modify rules in security groups, but cannot delete them or
 Create a policy so that **only a specific role** (e.g., `FinanceRole`) can upload files to the `finance-reports` bucket.
 
 #### ✅ Checklist:
-- [ ] Create IAM role named `FinanceRole`
-- [ ] Create bucket policy for `finance-reports` bucket
-- [ ] Use `"Principal": {"AWS": "arn:aws:iam::account:role/FinanceRole"}`
-- [ ] Grant `s3:PutObject` and `s3:PutObjectAcl` permissions
-- [ ] Apply bucket policy to S3 bucket
-- [ ] Test upload with the role
-- [ ] Verify other users/roles cannot upload
-- [ ] Document the role-based access
+- [ ] Research S3 bucket policies vs IAM policies
+- [ ] Understand role-based access control in S3
+- [ ] Research how to specify role principals in bucket policies
+- [ ] Implement bucket policy with role-specific access
+- [ ] Test access with the specified role and verify others are denied
 
 ---
 
@@ -127,14 +109,11 @@ Create a policy so that **only a specific role** (e.g., `FinanceRole`) can uploa
 Allow a **group** to manage subnets, but only if they have the tag `"Environment": "Dev"`.
 
 #### ✅ Checklist:
-- [ ] Create IAM group
-- [ ] Create policy with subnet management permissions
-- [ ] Add condition: `"StringEquals": {"ec2:ResourceTag/Environment": "Dev"}`
-- [ ] Include permissions: `ec2:CreateSubnet`, `ec2:ModifySubnetAttribute`, `ec2:DeleteSubnet`
-- [ ] Attach policy to group
-- [ ] Test subnet operations on Dev-tagged resources
-- [ ] Verify access is denied for non-Dev resources
-- [ ] Document the tag-based access control
+- [ ] Research tag-based access control in AWS
+- [ ] Understand EC2 subnet management permissions
+- [ ] Research how to implement resource tag conditions
+- [ ] Implement policy with tag-based restrictions
+- [ ] Test operations on resources with and without required tags
 
 ---
 
@@ -143,14 +122,11 @@ Allow a **group** to manage subnets, but only if they have the tag `"Environment
 Create an **explicit denial policy** for all users in a group, except one (`JuanDev`), who should be able to access the bucket.
 
 #### ✅ Checklist:
-- [ ] Create IAM group
-- [ ] Create policy with `"Effect": "Deny"` for S3 access
-- [ ] Add exception condition: `"StringNotEquals": {"aws:username": "JuanDev"}`
-- [ ] Apply to all users in the group
-- [ ] Create separate allow policy for JuanDev
-- [ ] Test access for JuanDev (should work)
-- [ ] Test access for other group members (should be denied)
-- [ ] Document the exception-based access control
+- [ ] Research explicit deny policies and their precedence
+- [ ] Understand username-based access control conditions
+- [ ] Research how to implement user exceptions in deny policies
+- [ ] Implement deny policy with user exception
+- [ ] Test access for both the exception user and group members
 
 ---
 
@@ -159,14 +135,11 @@ Create an **explicit denial policy** for all users in a group, except one (`Juan
 Allow a **user** to access S3 objects only if they logged in with MFA.
 
 #### ✅ Checklist:
-- [ ] Enable MFA for the user
-- [ ] Create IAM policy with S3 permissions
-- [ ] Add MFA condition: `"Bool": {"aws:MultiFactorAuthPresent": "true"}`
-- [ ] Attach policy to user
-- [ ] Test access with MFA authentication
-- [ ] Verify access is denied without MFA
-- [ ] Document MFA requirement
-- [ ] Test with different S3 operations
+- [ ] Research MFA implementation in AWS IAM
+- [ ] Understand MFA-based access control conditions
+- [ ] Research how to configure MFA for users
+- [ ] Implement policy requiring MFA authentication
+- [ ] Test access with and without MFA enabled
 
 ---
 
@@ -175,14 +148,11 @@ Allow a **user** to access S3 objects only if they logged in with MFA.
 A **network role** should be able to attach and detach internet gateways to a VPC, but not create or delete them.
 
 #### ✅ Checklist:
-- [ ] Create IAM role for network operations
-- [ ] Create policy with `ec2:AttachInternetGateway` and `ec2:DetachInternetGateway`
-- [ ] Explicitly deny `ec2:CreateInternetGateway` and `ec2:DeleteInternetGateway`
-- [ ] Attach policy to role
-- [ ] Test internet gateway attachment/detachment
-- [ ] Verify creation and deletion are denied
-- [ ] Test with different VPCs
-- [ ] Document the restricted permissions
+- [ ] Research internet gateway management permissions
+- [ ] Understand the difference between gateway lifecycle and attachment operations
+- [ ] Research how to implement selective permission grants
+- [ ] Implement policy allowing attachment but preventing lifecycle management
+- [ ] Test both allowed and denied operations
 
 ---
 
@@ -191,16 +161,11 @@ A **network role** should be able to attach and detach internet gateways to a VP
 Grant permissions to an **architects group** to create and accept peering connections between VPCs.
 
 #### ✅ Checklist:
-- [ ] Create IAM group for architects
-- [ ] Create policy with peering permissions
-- [ ] Include: `ec2:CreateVpcPeeringConnection`, `ec2:AcceptVpcPeeringConnection`
-- [ ] Add: `ec2:DescribeVpcPeeringConnections` for visibility
-- [ ] Attach policy to group
-- [ ] Add users to the group
-- [ ] Test peering connection creation
-- [ ] Test peering connection acceptance
-- [ ] Test across different AWS accounts if needed
-- [ ] Document the peering workflow
+- [ ] Research VPC peering connection permissions
+- [ ] Understand the difference between creating and accepting peering connections
+- [ ] Research cross-account peering considerations
+- [ ] Implement policy for peering connection management
+- [ ] Test peering operations and cross-account scenarios
 
 ---
 
@@ -209,15 +174,11 @@ Grant permissions to an **architects group** to create and accept peering connec
 A **temporary user** can access an S3 bucket only during business hours (e.g., 9 AM to 6 PM UTC).
 
 #### ✅ Checklist:
-- [ ] Create IAM user for temporary access
-- [ ] Create policy with S3 permissions
-- [ ] Add time condition: `"DateGreaterThan": {"aws:CurrentTime": "2024-01-01T09:00:00Z"}`
-- [ ] Add time condition: `"DateLessThan": {"aws:CurrentTime": "2024-01-01T18:00:00Z"}`
-- [ ] Use `aws:CurrentTime` with proper timezone handling
-- [ ] Attach policy to user
-- [ ] Test access during allowed hours
-- [ ] Test access outside allowed hours (should be denied)
-- [ ] Document the time-based access control
+- [ ] Research time-based access control in AWS IAM
+- [ ] Understand date/time condition operators
+- [ ] Research timezone handling in IAM policies
+- [ ] Implement policy with time-based restrictions
+- [ ] Test access during and outside allowed time periods
 
 ---
 
@@ -230,13 +191,8 @@ An **auditor role** can:
 * Cannot modify anything.
 
 #### ✅ Checklist:
-- [ ] Create IAM role for auditors
-- [ ] Create policy with S3 read permissions (`s3:GetObject`, `s3:ListBucket`)
-- [ ] Add EC2 describe permissions (`ec2:DescribeVpcs`, `ec2:DescribeSubnets`, `ec2:DescribeRouteTables`)
-- [ ] Explicitly deny all modify/write actions
-- [ ] Use `"Effect": "Deny"` for write operations
-- [ ] Attach policy to role
-- [ ] Test S3 object reading
-- [ ] Test VPC configuration viewing
-- [ ] Verify modification attempts are denied
-- [ ] Document the read-only auditor permissions
+- [ ] Research read-only access patterns across multiple AWS services
+- [ ] Understand the scope of describe vs modify permissions
+- [ ] Research how to implement comprehensive read-only access
+- [ ] Implement policy combining multiple service read permissions
+- [ ] Test read access across all specified services and verify write operations are denied

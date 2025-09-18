@@ -12,7 +12,7 @@ This repository is structured to provide progressive learning through hands-on p
 
 | Lab | Topic | Description | Difficulty |
 |-----|-------|-------------|------------|
-| [**01-IAM-LABS**](./01-IAM-LABS/) | Identity and Access Management | 25 comprehensive IAM exercises covering policies, roles, groups, and advanced access controls | ⭐⭐⭐ |
+| [**01-IAM-LABS**](./01-IAM-LABS/) | Identity and Access Management | 34 comprehensive IAM exercises covering policies, roles, groups, and advanced access controls | ⭐⭐⭐ |
 
 ### 🔄 Upcoming Labs
 

@@ -1,0 +1,36 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowListAndDescribeVpcs",
+			"Effect": "Allow",
+			"Action": [
+				"ec2:Describe*",
+				"ec2:GetSubnetCidrReservations"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "AllowVpcCreation",
+			"Effect": "Allow",
+			"Action": [
+				"ec2:CreateVpc",
+				"ec2:CreateTags",
+				"ec2:CreateSubnet"
+			],
+			"Resource": "*"
+		},
+        {
+            "Sid": "DenyVpcDeletion",
+            "Effect": "Deny",
+            "Action": [
+                "ec2:DeleteVpc",
+                "ec2:DeleteSubnet",
+                "ec2:DeleteInternetGateway",
+                "ec2:DeleteRouteTable",
+                "ec2:DeleteSecurityGroup"
+            ],
+            "Resource": "*"
+        }
+	]
+}

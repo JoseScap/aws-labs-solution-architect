@@ -59,11 +59,11 @@ Grant a **group** read-only access to objects within a bucket, but only if they 
 Allow a **user** to create new VPCs and subnets, but explicitly deny the action to delete them.
 
 #### ✅ Checklist:
-- [ ] Research EC2 VPC and subnet permissions
-- [ ] Understand the difference between allow and deny effects
-- [ ] Research how to implement explicit deny statements
-- [ ] Implement policy with creation permissions and deletion denials
-- [ ] Test both creation and deletion scenarios
+- [x] Research EC2 VPC and subnet permissions
+- [x] Understand the difference between allow and deny effects
+- [x] Research how to implement explicit deny statements
+- [x] Implement policy with creation permissions and deletion denials
+- [x] Test both creation and deletion scenarios
 
 ---
 

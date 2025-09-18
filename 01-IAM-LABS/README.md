@@ -69,14 +69,14 @@ Allow a **user** to create new VPCs and subnets, but explicitly deny the action 
 
 ### 4. **NACLs Read-Only Control** *(Identity-Based Policy)*
 
-Grant a **security group** read-only access to Network Access Control Lists (NACLs) across all VPCs.
+Grant a **user, user group or role** read-only access to Network Access Control Lists (NACLs) across all VPCs.
 
 #### ✅ Checklist:
-- [ ] Research NACL permissions and read-only access patterns
-- [ ] Understand the difference between describe and modify permissions
-- [ ] Research resource patterns for cross-VPC access
-- [ ] Implement read-only policy for NACLs
-- [ ] Test access across multiple VPCs
+- [x] Research NACL permissions and read-only access patterns
+- [x] Understand the difference between describe and modify permissions
+- [x] Research resource patterns for cross-VPC access
+- [x] Implement read-only policy for NACLs
+- [x] Test access across multiple VPCs
 
 ---
 

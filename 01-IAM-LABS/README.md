@@ -158,12 +158,22 @@ This exercise requires a **multi-policy approach** to implement role-based S3 ac
 
 A **network role** should be able to attach and detach internet gateways to a VPC, but not create or delete them.
 
+#### 📋 **Solution Implementation:**
+
+**Policy File:** [`06-InternetGatewaysManagement.json`](06-InternetGatewaysManagement.json)
+
+This policy implements selective Internet Gateway management with three key components:
+- **Discovery permissions** with `ec2:Describe*` for listing and identifying existing Internet Gateways and VPCs
+- **Attachment operations** allowing `ec2:AttachInternetGateway` and `ec2:DetachInternetGateway` for connecting/disconnecting gateways to VPCs
+- **Explicit denial** of lifecycle operations including `ec2:CreateInternetGateway` and `ec2:DeleteInternetGateway` to prevent gateway creation and deletion
+- **Selective access control** that separates operational management from resource lifecycle management
+
 #### ✅ Checklist:
-- [ ] Research internet gateway management permissions
-- [ ] Understand the difference between gateway lifecycle and attachment operations
-- [ ] Research how to implement selective permission grants
-- [ ] Implement policy allowing attachment but preventing lifecycle management
-- [ ] Test both allowed and denied operations
+- [x] Research internet gateway management permissions
+- [x] Understand the difference between gateway lifecycle and attachment operations
+- [x] Research how to implement selective permission grants
+- [x] Implement policy allowing attachment but preventing lifecycle management
+- [x] Test both allowed and denied operations
 
 ---
 

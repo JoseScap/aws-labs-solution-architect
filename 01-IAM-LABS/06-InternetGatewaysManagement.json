@@ -1,0 +1,31 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowDescribeVpcs",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Describe*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowAttachAndDetachIgws",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AttachInternetGateway",
+                "ec2:DetachInternetGateway"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyCreateAndDeleteIgws",
+            "Effect": "Deny",
+            "Action": [
+                "ec2:CreateInternetGateway",
+                "ec2:DeleteInternetGateway"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

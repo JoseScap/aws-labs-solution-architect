@@ -177,7 +177,7 @@ This policy implements selective Internet Gateway management with three key comp
 
 ---
 
-### 7. **Multiple Access Combination** *(Identity-Based Policy)*
+### 7. **Multiple Access Combination to Audit** *(Identity-Based Policy)*
 
 An **auditor role** can:
 
@@ -185,12 +185,30 @@ An **auditor role** can:
 * View VPC, subnets, and route table configurations.
 * Cannot modify anything.
 
+#### 📋 **Solution Implementation:**
+
+This exercise implements a **multi-policy audit solution** for comprehensive read-only access:
+
+1. **Identity Policy for Role Assumption** - [`07-MultipleAccessCombinationToAudit-AssumeRoleIdentityPolicy.json`](07-MultipleAccessCombinationToAudit-AssumeRoleIdentityPolicy.json)
+   - Allows users to assume the `AuditorRole`
+   - Uses `sts:AssumeRole` action with specific role ARN
+
+2. **Role Trust Policy** - [`07-MultipleAccessCombinationToAudit-AuditorRoleTrustPolicy.json`](07-MultipleAccessCombinationToAudit-AuditorRoleTrustPolicy.json)
+   - Defines who can assume the `AuditorRole`
+   - Trusts the AWS account root to assume the role
+
+3. **Auditor Role Identity Policy** - [`07-MultipleAccessCombinationToAudit-AuditorIdentityPolicy.json`](07-MultipleAccessCombinationToAudit-AuditorIdentityPolicy.json)
+   - **VPC Discovery**: `ec2:Describe*` for comprehensive VPC, subnet, and route table information
+   - **S3 Discovery**: `s3:List*` for listing all buckets and their contents
+   - **Read-only design**: Only describe and list permissions, no modification capabilities
+   - **Multi-service access**: Combines EC2 and S3 permissions for comprehensive auditing
+
 #### ✅ Checklist:
-- [ ] Research read-only access patterns across multiple AWS services
-- [ ] Understand the scope of describe vs modify permissions
-- [ ] Research how to implement comprehensive read-only access
-- [ ] Implement policy combining multiple service read permissions
-- [ ] Test read access across all specified services and verify write operations are denied
+- [x] Research read-only access patterns across multiple AWS services
+- [x] Understand the scope of describe vs modify permissions
+- [x] Research how to implement comprehensive read-only access
+- [x] Implement policy combining multiple service read permissions
+- [x] Test read access across all specified services and verify write operations are denied
 
 ---
 

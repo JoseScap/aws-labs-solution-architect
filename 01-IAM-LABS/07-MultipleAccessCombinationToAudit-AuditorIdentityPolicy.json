@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowDescribeVpcsAndVpcComponents",
+            "Effect": "Allow",
+            "Action": "ec2:Describe*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowListBucketsAndBucketContents",
+            "Effect": "Allow",
+            "Action": "s3:List*",
+            "Resource": "*"
+        }
+    ]
+}

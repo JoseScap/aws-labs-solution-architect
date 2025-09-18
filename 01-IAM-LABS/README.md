@@ -34,6 +34,16 @@
 
 Create a policy that allows a **specific user** complete access to all S3 buckets.
 
+#### 📋 **Solution Implementation:**
+
+**Policy File:** [`01-FullS3AccessWithinAccountOnly.json`](01-FullS3AccessWithinAccountOnly.json)
+
+This policy implements user-specific S3 access with the following key features:
+- **Full S3 permissions** using `s3:*` action
+- **User restriction** via `aws:username` condition targeting user "labs2"
+- **Global resource access** with `"Resource": "*"` for all S3 buckets
+- **Conditional access** ensuring only the specified user can perform S3 operations
+
 #### ✅ Checklist:
 - [x] Research IAM policy structure for S3 access
 - [x] Implement policy that restricts access.
@@ -44,6 +54,15 @@ Create a policy that allows a **specific user** complete access to all S3 bucket
 ### 2. **S3 Read-Only Access Restricted by Prefix** *(Identity-Based Policy)*
 
 Grant a **group** read-only access to objects within a bucket, but only if they start with `2025/`.
+
+#### 📋 **Solution Implementation:**
+
+**Policy File:** [`02-S3ReadOnlyAccessRestrictedbyPrefix.json`](02-S3ReadOnlyAccessRestrictedbyPrefix.json)
+
+This policy implements prefix-based S3 access control with three distinct statements:
+- **Bucket listing** with `s3:ListAllMyBuckets` for general bucket discovery
+- **Prefix-restricted listing** using `s3:ListBucket` with `StringLike` condition for `2025/*` prefix
+- **Object access** limited to `2025/*` objects with comprehensive read permissions including `GetObject`, `GetObjectAcl`, `GetObjectAttributes`, and versioning support
 
 #### ✅ Checklist:
 - [x] Research IAM groups and their use cases
@@ -58,6 +77,15 @@ Grant a **group** read-only access to objects within a bucket, but only if they 
 
 Allow a **user** to create new VPCs and subnets, but explicitly deny the action to delete them.
 
+#### 📋 **Solution Implementation:**
+
+**Policy File:** [`03-VpcCreationAccessbutNoDeletion.json`](03-VpcCreationAccessbutNoDeletion.json)
+
+This policy implements selective VPC management with three key components:
+- **Read permissions** with `ec2:Describe*` and `ec2:GetSubnetCidrReservations` for VPC discovery and information
+- **Creation permissions** allowing `ec2:CreateVpc`, `ec2:CreateTags`, and `ec2:CreateSubnet` for infrastructure setup
+- **Explicit denial** of deletion operations including `ec2:DeleteVpc`, `ec2:DeleteSubnet`, `ec2:DeleteInternetGateway`, `ec2:DeleteRouteTable`, and `ec2:DeleteSecurityGroup`
+
 #### ✅ Checklist:
 - [x] Research EC2 VPC and subnet permissions
 - [x] Understand the difference between allow and deny effects
@@ -70,6 +98,17 @@ Allow a **user** to create new VPCs and subnets, but explicitly deny the action 
 ### 4. **NACLs Read-Only Control** *(Identity-Based Policy)*
 
 Grant a **user, user group or role** read-only access to Network Access Control Lists (NACLs) across all VPCs.
+
+#### 📋 **Solution Implementation:**
+
+**Policy File:** [`04-NaclsReadOnlyControl.json`](04-NaclsReadOnlyControl.json)
+
+This policy implements comprehensive read-only access to NACLs with the following features:
+- **VPC discovery** with `ec2:DescribeVpcs` to list and identify VPCs
+- **NACL information** using `ec2:DescribeNetworkAcls` for reading NACL configurations
+- **Subnet context** with `ec2:DescribeSubnets` to understand NACL associations
+- **Cross-VPC access** using `"Resource": "*"` to enable access across all VPCs in the account
+- **Read-only design** ensuring no modification permissions are granted
 
 #### ✅ Checklist:
 - [x] Research NACL permissions and read-only access patterns

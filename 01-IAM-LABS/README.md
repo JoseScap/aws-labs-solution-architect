@@ -84,12 +84,34 @@ Grant a **user, user group or role** read-only access to Network Access Control 
 
 Create a policy so that **only a specific role** (e.g., `FinanceRole`) can upload files to the `finance-reports` bucket.
 
+#### 📋 **Solution Implementation:**
+
+This exercise requires a **multi-policy approach** to implement role-based S3 access:
+
+1. **Identity Policy for Role Assumption** - [`05-S3BucketAccessibleOnlyViaRole-AssumeRoleIdentityPolicy.json`](05-S3BucketAccessibleOnlyViaRole-AssumeRoleIdentityPolicy.json)
+   - Allows users to assume the `FinanceRole`
+   - Uses `sts:AssumeRole` action with specific role ARN
+
+2. **Role Trust Policy** - [`05-S3BucketAccessibleOnlyViaRole-FinanceRoleTrustPolicy.json`](05-S3BucketAccessibleOnlyViaRole-FinanceRoleTrustPolicy.json)
+   - Defines who can assume the `FinanceRole`
+   - Trusts the AWS account root to assume the role
+
+3. **S3 Bucket Policy** - [`05-S3BucketAccessibleOnlyViaRole-BucketPolicy.json`](05-S3BucketAccessibleOnlyViaRole-BucketPolicy.json)
+   - Resource-based policy attached to the S3 bucket
+   - Allows only the `FinanceRole` to perform S3 operations
+   - Grants `ListBucket`, `ListBucketMultipartUploads`, `ListBucketVersions`, and `PutObject` permissions
+
+4. **Role Identity Policy** - [`05-S3BucketAccessibleOnlyViaRole-S3Read&WriteIdentityPolicy.json`](05-S3BucketAccessibleOnlyViaRole-S3Read&WriteIdentityPolicy.json)
+   - Attached to the `FinanceRole` for S3 permissions
+   - Provides `PutObject` and bucket listing capabilities
+   - Ensures the role has necessary permissions when assumed
+
 #### ✅ Checklist:
-- [ ] Research S3 bucket policies vs IAM policies
-- [ ] Understand role-based access control in S3
-- [ ] Research how to specify role principals in bucket policies
-- [ ] Implement bucket policy with role-specific access
-- [ ] Test access with the specified role and verify others are denied
+- [x] Research S3 bucket policies vs IAM policies
+- [x] Understand role-based access control in S3
+- [x] Research how to specify role principals in bucket policies
+- [x] Implement bucket policy with role-specific access
+- [x] Test access with the specified role and verify others are denied
 
 ---
 

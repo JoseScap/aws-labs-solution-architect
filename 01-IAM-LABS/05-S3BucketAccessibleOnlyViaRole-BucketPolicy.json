@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowFinanceRoleS3Access",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::766468424926:role/FinanceRole"
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:ListBucketMultipartUploads",
+                "s3:ListBucketVersions",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::josescap-finance",
+                "arn:aws:s3:::josescap-finance/**"
+            ]
+        }
+    ]
+}

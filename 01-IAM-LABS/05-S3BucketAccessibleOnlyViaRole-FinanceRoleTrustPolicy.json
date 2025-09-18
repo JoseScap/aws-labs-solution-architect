@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccountToAssumeFinanceRole",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::766468424926:root"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}

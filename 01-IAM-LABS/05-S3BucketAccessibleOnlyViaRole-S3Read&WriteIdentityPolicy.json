@@ -1,0 +1,27 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowS3ObjectOperations",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::josescap-finance",
+                "arn:aws:s3:::josescap-finance/**"
+            ]
+        },
+        {
+            "Sid": "AllowS3BucketListing",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:ListBucketMultipartUploads",
+                "s3:ListBucket",
+                "s3:ListBucketVersions"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

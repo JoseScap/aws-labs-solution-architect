@@ -271,16 +271,23 @@ This exercise implements a **two-policy approach** for delegated IAM administrat
 **Estimated time:** 3-4 hours per exercise
 **Key skills developed:** Conditional logic, policy optimization, service integration, security best practices
 
-### 10. **Conditional S3 Access by IP** *(Identity-Based Policy)*
+### 10. **Conditional S3 Access by IP** *(Identity-Based Policy & Resource-Based Policy)*
 
 A **role** should be able to list and read objects from a bucket, but only if the connection comes from your office IP (e.g., `203.0.113.0/24`).
+
+**Variant A (Identity-Based Policy):** Apply the IP condition inside the IAM role's identity policy. This means the role can only list and read objects if the request comes from the allowed IP range(s).
+
+**Variant B (Bucket Policy):** Apply the IP condition inside the S3 bucket policy itself. This ensures the bucket enforces the restriction regardless of which IAM role or user tries to access it.
 
 #### ✅ Checklist:
 - [ ] Research IAM roles and their characteristics
 - [ ] Identify required S3 permissions for listing and reading
 - [ ] Research IP-based access control conditions in IAM
-- [ ] Implement the policy with IP restrictions
-- [ ] Test access from different IP ranges
+- [ ] Research the difference between identity-based and resource-based IP restrictions
+- [ ] Implement Variant A: Identity-based policy with IP restrictions
+- [ ] Implement Variant B: Bucket policy with IP restrictions
+- [ ] Test access from different IP ranges for both variants
+- [ ] Compare the security implications of each approach
 
 ---
 

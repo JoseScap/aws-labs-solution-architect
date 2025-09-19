@@ -229,12 +229,27 @@ Create a **resource-based policy** (bucket policy) that allows a specific extern
 
 Create a **permissions boundary** that limits a delegated administrator to only manage IAM users and groups, but cannot create or delete roles or policies.
 
+#### 📋 **Solution Implementation:**
+
+This exercise implements a **two-policy approach** for delegated IAM administration:
+
+1. **Identity Policy for Full IAM Access** - [`09-IamFullManagement-IdentityPolicy.json`](09-IamFullManagement-IdentityPolicy.json)
+   - Grants comprehensive IAM permissions with `iam:*` action
+   - Provides the base permissions needed for IAM management
+   - Uses `"Resource": "*"` for account-wide IAM access
+
+2. **Permissions Boundary Policy** - [`09-IamFullManagementBoundary-IdentityPolicy.json`](09-IamFullManagementBoundary-IdentityPolicy.json)
+   - **Restricts scope** to only user and group management with `iam:*User*` and `iam:*Group*` actions
+   - **Prevents role/policy management** by excluding `iam:*Role*` and `iam:*Policy*` actions
+   - **Enforces delegation limits** ensuring the administrator cannot create or delete roles or policies
+   - **Maintains user/group control** while preventing privilege escalation
+
 #### ✅ Checklist:
-- [ ] Research IAM permissions boundaries and their purpose
-- [ ] Understand the difference between permissions boundaries and policies
-- [ ] Research how to implement granular IAM management restrictions
-- [ ] Implement permissions boundary for delegated IAM administration
-- [ ] Test boundary enforcement and verify role/policy management is denied
+- [x] Research IAM permissions boundaries and their purpose
+- [x] Understand the difference between permissions boundaries and policies
+- [x] Research how to implement granular IAM management restrictions
+- [x] Implement permissions boundary for delegated IAM administration
+- [x] Test boundary enforcement and verify role/policy management is denied
 
 ---
 

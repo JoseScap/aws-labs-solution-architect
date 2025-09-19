@@ -1,0 +1,14 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowFullManagementForUsersAndGroupsBoundary",
+            "Effect": "Allow",
+            "Action": [
+                "iam:*User*",
+                "iam:*Group*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
